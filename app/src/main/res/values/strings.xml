@@ -14,4 +14,5 @@
     <string name="valswnotificacion">¿Notificar?</string>
     <string name="valbtnregistrar">Registrar Usuario</string>
     <string name="valbtnlistar">Listar Usuarios</string>
+    <string name="mensajeregistrocorrecto">Persona Registrada Correctamente</string>
 </resources>
