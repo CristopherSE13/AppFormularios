@@ -3,6 +3,7 @@ package pe.edu.idat.appformularios
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -23,6 +24,7 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener,AdapterView.O
         super.onCreate(savedInstanceState)
         binding = ActivityRegistroBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.i("MensajeInfo","App inicializada!!")
         binding.btnlistar.setOnClickListener(this)
         binding.btnregistrar.setOnClickListener(this)
         ArrayAdapter.createFromResource(
@@ -34,6 +36,9 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener,AdapterView.O
             binding.spestadocivil.adapter = adapter
         }
         binding.spestadocivil.onItemSelectedListener = this
+        binding.cbdeportes.setOnClickListener(this)
+        binding.cbmusica.setOnClickListener(this)
+        binding.cbotros.setOnClickListener(this)
     }
     override fun onClick(vista: View) {
         if(vista is CheckBox){
@@ -72,7 +77,7 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener,AdapterView.O
            val infopersona = binding.etnombres.text.toString()+ " "+
                    binding.etapellidos.text.toString()+ " "+
                    obtenerGeneroSeleccionado()+ " "+
-                   listaPreferencias.toArray()+ " "+
+                   obtenerPreferencias()+ " "+
                    estadocivil+ " "+
                    binding.swnotificacion.isChecked
            listaPersonas.add(infopersona)
@@ -81,6 +86,13 @@ class RegistroActivity : AppCompatActivity(), View.OnClickListener,AdapterView.O
                tipoMensaje = TipoMensaje.SUCCESSFUL)
            setearControles()
        }
+    }
+    private fun obtenerPreferencias():String{
+        var preferencias =""
+        for(pref in listaPreferencias){
+            preferencias += "$pref -"
+        }
+        return preferencias
     }
 
     private fun setearControles(){
